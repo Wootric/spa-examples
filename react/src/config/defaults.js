@@ -1,0 +1,2 @@
+export const WOOTRIC_ACCOUNT_TOKEN = 'NPS-XXXXXXXX';
+export const WOOTRIC_SURVEY_IMMEDIATELY = true;
