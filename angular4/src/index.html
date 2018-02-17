@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Angular4</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="text/javascript">
+   wootric_survey_immediately = true; // Shows survey immediately for testing purposes.  TODO: Comment out for production.
+   window.wootricSettings = {
+      email: 'customer@example.com', // TODO: Required to uniquely identify a user. It can be any unique value other than email.
+      // external_id: 'abc123', // TODO: TODO: Reference field for external integrations only. Send it along with email. OPTIONAL
+      created_at: 1234567890, // TODO: The current logged in user's sign-up date as a 10 digit Unix timestamp in seconds. OPTIONAL
+      account_token: 'NPS-xxxxxxxx' // This is your unique account token.
+  };
+</script>
+<script type="text/javascript" src="https://disutgh7q0ncc.cloudfront.net/beacon.js"></script>
+<script type="text/javascript">
+  // This loads the Wootric survey
+  window.wootric('run');
+</script>
+<!-- end Wootric code -->
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
