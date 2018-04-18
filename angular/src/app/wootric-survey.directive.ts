@@ -7,6 +7,7 @@ import { Directive, AfterViewInit, ElementRef } from '@angular/core';
 export class WootricSurveyDirective implements AfterViewInit {
 
   constructor(private elementRef:ElementRef) {
+    window['wootric_no_surveyed_cookie'] = true;
     window['wootric_survey_immediately'] = true;
     window['wootricSettings'] = {
       email: 'customer@example.com',
