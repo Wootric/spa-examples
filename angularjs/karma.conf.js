@@ -5,10 +5,10 @@ module.exports = function(config) {
     basePath: './app',
 
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'components/**/*.js',
+      'lib/angular/angular.js',
+      'lib/angular-route/angular-route.js',
+      '../node_modules/angular-mocks/angular-mocks.js',
+      'core/**/*.js',
       'view*/**/*.js'
     ],
 
@@ -21,14 +21,8 @@ module.exports = function(config) {
     plugins: [
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-jasmine',
-      'karma-junit-reporter'
-    ],
-
-    junitReporter: {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
-    }
+      'karma-jasmine'
+    ]
 
   });
 };

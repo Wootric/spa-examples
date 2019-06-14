@@ -1,23 +1,4 @@
 /* app css stylesheet */
-body {
-  height: 85%;
-}
-
-#content {
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-top: 20px;
-}
-
-#header {
-  width: 100%;
-  height: 100px;
-  background-color: grey;
-}
-
-html {
-  height: 100vh;
-}
 
 .menu {
   list-style: none;
@@ -41,8 +22,4 @@ html {
 .menu > li + li:before {
   content: "|";
   padding-right: 0.3em;
-}
-
-p {
-  margin-top: 0;
 }
