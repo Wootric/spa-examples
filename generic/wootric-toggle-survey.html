@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wootric Survey Toggle</title>
+    <style>
+        body { font-family: sans-serif; padding: 0px; max-width: 400px; margin: auto; }
+        label { display: block; font-size: 13px; color: #666; margin-bottom: 4px; }
+        input { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #6366f1; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #4f46e5; }
+    </style>
+</head>
+<body>
+    <h2>Wootric Survey Toggle</h2>
+
+    <label>Account Token</label>
+    <input type="text" id="token" placeholder="NPS-XXXXXXXX">
+
+    <label>Email</label>
+    <input type="text" id="email" value="test@example.com">
+
+    <label>Created At (Unix timestamp)</label>
+    <input type="text" id="created_at">
+
+    <button id="btn">Show Survey</button>
+
+    <script>
+        document.getElementById('created_at').value = Math.floor(Date.now() / 1000);
+
+        let visible = false;
+        const btn = document.getElementById('btn');
+
+        function removeWootricElements() {
+            // Remove all Wootric-related elements from the DOM
+            const selectors = [
+                '#wootric-modal',
+                '#wootric-placeholder',
+                '[id^="wootric"]',
+                '.wootric-beacon',
+                '.wootric-slide',
+                'iframe[src*="wootric"]'
+            ];
+            selectors.forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => el.remove());
+            });
+        }
+
+        function loadWootric() {
+            // Set up settings
+            window.wootric_survey_immediately = true;
+            window.wootric_no_surveyed_cookie = true;
+            window.wootricSettings = {
+                email: document.getElementById('email').value,
+                created_at: parseInt(document.getElementById('created_at').value),
+                account_token: document.getElementById('token').value
+            };
+
+            // Remove existing script if any
+            const oldScript = document.getElementById('wootric-script');
+            if (oldScript) oldScript.remove();
+
+            // Clear Wootric globals to force fresh init
+            delete window.wootric;
+            delete window.WootricSurvey;
+
+            // Load fresh script
+            const script = document.createElement('script');
+            script.id = 'wootric-script';
+            script.src = 'https://cdn.wootric.com/wootric-sdk.js?t=' + Date.now();
+            script.onload = function() {
+                window.wootric('run');
+            };
+            document.body.appendChild(script);
+        }
+
+        btn.onclick = function() {
+            visible = !visible;
+            btn.textContent = visible ? 'Hide Survey' : 'Show Survey';
+
+            if (visible) {
+                loadWootric();
+            } else {
+                if (window.WootricSurvey && typeof WootricSurvey.stop === 'function') {
+                    WootricSurvey.stop();
+                }
+                removeWootricElements();
+            }
+        };
+    </script>
+</body>
+</html>
